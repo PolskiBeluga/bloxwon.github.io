@@ -79,14 +79,14 @@
             width: 100%;
         }
 
-        /* Chat */
+        
         #chat-container {
             position: fixed;
             bottom: 50px;
             right: 20px;
             width: 300px;
             height: 400px;
-            background-color: #34495e;
+            background-color: #000; 
             border-radius: 10px;
             display: none; 
             flex-direction: column;
@@ -108,8 +108,9 @@
             overflow-y: auto;
             margin: 10px 0;
             padding: 5px;
-            background-color: #ecf0f1;
+            background-color: #000;
             border-radius: 8px;
+            color: white; 
         }
         #chat-footer {
             display: flex;
@@ -122,6 +123,8 @@
             border: none;
             outline: none;
             font-size: 1em; 
+            background-color: #333; 
+            color: white;
         }
         #send-button {
             background-color: #e74c3c;
@@ -146,7 +149,7 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-
+        
         #chat-category {
             padding: 5px;
             background-color: #2c3e50;
@@ -243,7 +246,7 @@
             <button onclick="toggleChat()">X</button>
         </div>
         <div id="chat-body">
-           
+            
         </div>
         <div id="chat-footer">
             <input type="text" id="chat-input" placeholder="Type a message...">
@@ -281,7 +284,7 @@
             }
         }
 
-        
+    
         function toggleChat() {
             const chatContainer = document.getElementById("chat-container");
             if (chatContainer.style.display === "none" || chatContainer.style.display === "") {
@@ -291,7 +294,7 @@
             }
         }
 
-       
+        
         function sendMessage() {
             const chatBody = document.getElementById("chat-body");
             const chatInput = document.getElementById("chat-input");
@@ -309,8 +312,8 @@
                 const messageElement = document.createElement("div");
                 messageElement.textContent = `🇵🇱 ${username}: ${message}`;
                 chatBody.appendChild(messageElement);
-                chatInput.value = '';  
-                chatBody.scrollTop = chatBody.scrollHeight; 
+                chatInput.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight;
             } else if (category === "general" && message) {
                 const messageElement = document.createElement("div");
                 messageElement.textContent = `${username}: ${message}`;
@@ -320,8 +323,13 @@
             }
         }
 
-       
+     
         document.getElementById("chat-toggle").addEventListener("click", toggleChat);
+
+       
+        if (!localStorage.getItem("username")) {
+            showLoginModal();
+        }
     </script>
 
 </body>
