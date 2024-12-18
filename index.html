@@ -11,144 +11,152 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #2c3e50;
-            color: #fff;
-            text-align: center;
-            position: relative;
+            background-color: #101010;
+            color: white;
+            line-height: 1.6;
         }
+
         header {
-            background-color: #34495e;
-            padding: 15px 30px;
-            text-align: left;
+            background-color: #222;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
+
         header h1 {
             font-size: 2em;
+            color: #e74c3c;
             margin: 0;
-            color: #fff;
         }
-        .cta-button, #kyc-button {
+
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        header nav a:hover {
+            color: #e74c3c;
+        }
+
+        .cta-button {
             background-color: #e74c3c;
             color: white;
             padding: 10px 20px;
             border: none;
-            border-radius: 10px;
-            text-transform: uppercase;
-            font-size: 1em;
+            border-radius: 5px;
+            font-size: 1.1em;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .cta-button:hover, #kyc-button:hover {
+
+        .cta-button:hover {
             background-color: #c0392b;
         }
 
-        #chat-container {
-            position: fixed;
-            bottom: 50px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            background-color: #000;
-            border-radius: 10px;
-            display: none;
-            flex-direction: column;
-            padding: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-        }
-        #chat-header {
-            background-color: #1abc9c;
-            padding: 10px;
-            border-radius: 8px;
-            color: white;
-            font-size: 1.2em;
+        .main-banner {
+            background: url('https://via.placeholder.com/1920x800') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            text-align: center;
+            position: relative;
         }
-        #chat-body {
-            flex-grow: 1;
-            overflow-y: auto;
-            margin: 10px 0;
-            padding: 5px;
-            background-color: #000;
-            border-radius: 8px;
+
+        .main-banner h2 {
+            font-size: 3em;
+            color: white;
+            margin: 0;
+        }
+
+        .main-banner p {
+            font-size: 1.5em;
+            margin-top: 10px;
             color: white;
         }
-        #chat-footer {
+
+        .game-cards {
+            padding: 50px 20px;
             display: flex;
-            gap: 10px;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-        #chat-input {
-            width: 80%;
-            padding: 15px;
-            border-radius: 8px;
-            border: none;
-            outline: none;
-            font-size: 1em;
-            background-color: #333;
-            color: white;
+
+        .game-card {
+            background-color: #444;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
         }
-        #send-button {
-            background-color: #e74c3c;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
+
+        .game-card:hover {
+            transform: scale(1.05);
         }
-        #send-button:hover {
-            background-color: #c0392b;
+
+        .game-card img {
+            width: 100%;
+            border-radius: 10px;
         }
-        #chat-toggle {
+
+        .game-card h3 {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: #222;
+            padding: 20px;
+            text-align: center;
+            color: #bdc3c7;
+        }
+
+        footer a {
+            color: #e74c3c;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #c0392b;
+        }
+
+        .chat-button {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background-color: #e74c3c;
             color: white;
-            padding: 10px;
+            padding: 15px 20px;
             border-radius: 50%;
+            font-size: 1.5em;
             cursor: pointer;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        #kyc-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-        #kyc-modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-        }
-        #kyc-modal input {
-            padding: 10px;
-            width: 80%;
-            margin: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-        #kyc-modal button {
-            background-color: #1abc9c;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-        }
-        #kyc-modal button:hover {
-            background-color: #16a085;
+        @media screen and (max-width: 768px) {
+            .main-banner h2 {
+                font-size: 2.5em;
+            }
+            .game-cards {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -156,119 +164,54 @@
 
     <header>
         <h1>Bloxwon Casino</h1>
-        <button id="kyc-button" onclick="showKycModal()">KYC - Level 1 Verification</button>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Games</a>
+            <a href="#">Promotions</a>
+            <a href="#">Support</a>
+        </nav>
+        <button class="cta-button">Sign Up</button>
     </header>
 
-    <section class="intro">
-        <p>Welcome to the best online casino, Bloxwon Casino! We offer the latest games and exciting promotions. Play now and win big!</p>
-        <button class="cta-button" id="sign-up-button" onclick="signUp()">Sign up now!</button>
+    <section class="main-banner">
+        <div>
+            <h2>Welcome to Bloxwon Casino</h2>
+            <p>Join now and play your favorite games!</p>
+            <button class="cta-button">Get Started</button>
+        </div>
     </section>
 
-    <section class="games-section">
+    <section class="game-cards">
         <div class="game-card">
-            <img src="https://via.placeholder.com/200x120" alt="Game 1">
+            <img src="https://via.placeholder.com/250" alt="Game 1">
             <h3>Slots</h3>
-            <p>Play the best slot machines!</p>
+            <p>Play the latest slot games!</p>
             <button class="cta-button">Play Now</button>
         </div>
         <div class="game-card">
-            <img src="https://via.placeholder.com/200x120" alt="Game 2">
+            <img src="https://via.placeholder.com/250" alt="Game 2">
             <h3>Roulette</h3>
-            <p>Feel the thrill of roulette!</p>
+            <p>Spin the wheel and win big!</p>
             <button class="cta-button">Play Now</button>
         </div>
         <div class="game-card">
-            <img src="https://via.placeholder.com/200x120" alt="Game 3">
+            <img src="https://via.placeholder.com/250" alt="Game 3">
             <h3>Poker</h3>
-            <p>Win at classic poker!</p>
+            <p>Master your poker skills!</p>
             <button class="cta-button">Play Now</button>
         </div>
     </section>
 
     <footer>
         <p>&copy; 2024 Bloxwon Casino. All rights reserved.</p>
+        <div>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Responsible Gaming</a>
+        </div>
     </footer>
 
-    <div id="chat-toggle">💬</div>
-    <div id="chat-container">
-        <div id="chat-header">
-            <span>Live Chat</span>
-            <button onclick="toggleChat()">X</button>
-        </div>
-        <div id="chat-body"></div>
-        <div id="chat-footer">
-            <input type="text" id="chat-input" placeholder="Type a message...">
-            <button id="send-button" onclick="sendMessage()">Send</button>
-        </div>
-    </div>
-
-    <div id="kyc-modal">
-        <div id="kyc-modal-content">
-            <h2>Level 1 Verification</h2>
-            <input type="text" id="full-name" placeholder="Full Name">
-            <input type="email" id="email" placeholder="Email">
-            <input type="text" id="address" placeholder="Address">
-            <button onclick="verifyKyc()">Verify</button>
-        </div>
-    </div>
-
-    <script>
-        function checkUserLogin() {
-            return localStorage.getItem('userLoggedIn') === 'true';
-        }
-
-        function signUp() {
-            localStorage.setItem('userLoggedIn', 'true');
-            document.getElementById("sign-up-button").style.display = 'none';
-            alert("Account Created! You are now logged in.");
-        }
-
-        function toggleChat() {
-            const chatContainer = document.getElementById("chat-container");
-            if (chatContainer.style.display === "none" || chatContainer.style.display === "") {
-                chatContainer.style.display = "flex";
-            } else {
-                chatContainer.style.display = "none";
-            }
-        }
-
-        function sendMessage() {
-            const chatBody = document.getElementById("chat-body");
-            const chatInput = document.getElementById("chat-input");
-            const message = chatInput.value.trim();
-            if (message) {
-                const messageElement = document.createElement("div");
-                messageElement.textContent = message;
-                chatBody.appendChild(messageElement);
-                chatInput.value = '';
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }
-        }
-
-        document.getElementById("chat-toggle").addEventListener("click", toggleChat);
-
-        function showKycModal() {
-            document.getElementById("kyc-modal").style.display = "flex";
-        }
-
-        function verifyKyc() {
-            const fullName = document.getElementById("full-name").value;
-            const email = document.getElementById("email").value;
-            const address = document.getElementById("address").value;
-            if (fullName && email && address) {
-                alert("Level 1 Verification Complete!");
-                document.getElementById("kyc-modal").style.display = "none";
-            } else {
-                alert("Please fill in all fields!");
-            }
-        }
-
-        window.onload = function() {
-            if (checkUserLogin()) {
-                document.getElementById("sign-up-button").style.display = 'none';
-            }
-        }
-    </script>
+    <button class="chat-button">💬</button>
 
 </body>
 </html>
