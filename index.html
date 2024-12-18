@@ -35,7 +35,7 @@
 
         header nav {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             justify-content: flex-end;
             flex-grow: 1;
         }
@@ -61,6 +61,7 @@
             border-radius: 5px;
             font-size: 1.2em;
             cursor: pointer;
+            display: none;
         }
 
         header .cta-button:hover {
@@ -231,54 +232,73 @@
     </div>
 
     <script>
-        document.getElementById("loginBtn").addEventListener("click", openLogin);
-        document.getElementById("signupBtn").addEventListener("click", openSignUp);
-        document.getElementById("promotionsBtn").addEventListener("click", openPromotions);
+        const promotionsBtn = document.getElementById("promotionsBtn");
+        const loginBtn = document.getElementById("loginBtn");
+        const signupBtn = document.getElementById("signupBtn");
+        const chatBtn = document.getElementById("chatBtn");
 
-        function openLogin() {
-            document.getElementById("loginModal").style.display = "flex";
+        promotionsBtn.addEventListener("click", () => openModal("promotions"));
+        loginBtn.addEventListener("click", () => openModal("login"));
+        signupBtn.addEventListener("click", () => openModal("signup"));
+        chatBtn.addEventListener("click", () => openModal("chat"));
+
+        function openModal(type) {
+            if (type === "promotions") {
+                disableButtons([promotionsBtn, loginBtn, signupBtn, chatBtn]);
+                document.getElementById("promotionsModal").style.display = "flex";
+                promotionsBtn.style.backgroundColor = "black";
+            } else if (type === "login") {
+                disableButtons([promotionsBtn, loginBtn, signupBtn, chatBtn]);
+                document.getElementById("loginModal").style.display = "flex";
+                loginBtn.style.backgroundColor = "black";
+            } else if (type === "signup") {
+                disableButtons([promotionsBtn, loginBtn, signupBtn, chatBtn]);
+                document.getElementById("signupModal").style.display = "flex";
+                signupBtn.style.backgroundColor = "black";
+            } else if (type === "chat") {
+                disableButtons([promotionsBtn, loginBtn, signupBtn, chatBtn]);
+                document.getElementById("chatModal").style.display = "flex";
+                chatBtn.style.backgroundColor = "black";
+            }
         }
 
-        function closeLogin() {
-            document.getElementById("loginModal").style.display = "none";
+        function closeModal(type) {
+            if (type === "promotions") {
+                document.getElementById("promotionsModal").style.display = "none";
+            } else if (type === "login") {
+                document.getElementById("loginModal").style.display = "none";
+            } else if (type === "signup") {
+                document.getElementById("signupModal").style.display = "none";
+            } else if (type === "chat") {
+                document.getElementById("chatModal").style.display = "none";
+            }
+            enableButtons();
         }
 
-        function openSignUp() {
-            document.getElementById("signupModal").style.display = "flex";
+        function disableButtons(buttons) {
+            buttons.forEach(button => {
+                button.disabled = true;
+            });
         }
 
-        function closeSignUp() {
-            document.getElementById("signupModal").style.display = "none";
-        }
-
-        function openPromotions() {
-            document.getElementById("promotionsModal").style.display = "flex";
+        function enableButtons() {
+            const buttons = [promotionsBtn, loginBtn, signupBtn, chatBtn];
+            buttons.forEach(button => {
+                button.disabled = false;
+                button.style.backgroundColor = "#e74c3c";
+            });
         }
 
         function closePromotions() {
-            document.getElementById("promotionsModal").style.display = "none";
+            closeModal("promotions");
         }
 
-        function loginUser() {
-            const email = document.getElementById("loginEmail").value;
-            const password = document.getElementById("loginPassword").value;
-            if (email && password) {
-                alert("Login successful!");
-                closeLogin();
-            } else {
-                alert("Please fill out both fields!");
-            }
+        function closeLogin() {
+            closeModal("login");
         }
 
-        function signUpUser() {
-            const email = document.getElementById("signupEmail").value;
-            const password = document.getElementById("signupPassword").value;
-            if (email && password) {
-                alert("Sign-up successful!");
-                closeSignUp();
-            } else {
-                alert("Please fill out both fields!");
-            }
+        function closeSignUp() {
+            closeModal("signup");
         }
     </script>
 </body>
