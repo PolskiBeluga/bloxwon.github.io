@@ -14,7 +14,7 @@
             background-color: #2c3e50;
             color: #fff;
             text-align: center;
-            position: relative; 
+            position: relative;
         }
         header {
             background-color: #34495e;
@@ -79,7 +79,7 @@
             width: 100%;
         }
 
-        /* Chat */
+        
         #chat-container {
             position: fixed;
             bottom: 50px;
@@ -88,7 +88,7 @@
             height: 400px;
             background-color: #34495e;
             border-radius: 10px;
-            display: none; /* Initially hidden */
+            display: none; 
             flex-direction: column;
             padding: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
@@ -145,7 +145,7 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* Dropdown for categories */
+        
         #chat-category {
             padding: 5px;
             background-color: #2c3e50;
@@ -192,7 +192,7 @@
         <p>&copy; 2024 Bloxwon Casino. All rights reserved.</p>
     </footer>
 
-
+ 
     <div id="chat-toggle">💬</div>
 
     <div id="chat-container">
@@ -201,7 +201,7 @@
             <button onclick="toggleChat()">X</button>
         </div>
         <div id="chat-body">
-           
+          
         </div>
         <div id="chat-footer">
             <select id="chat-category">
@@ -224,20 +224,20 @@
             }
         }
 
-       
+        
         function sendMessage() {
             const chatBody = document.getElementById("chat-body");
             const chatInput = document.getElementById("chat-input");
             const message = chatInput.value.trim();
             const category = document.getElementById("chat-category").value;
 
-        
+
             if (category === "poland" && message) {
                 const messageElement = document.createElement("div");
                 messageElement.textContent = `🇵🇱 (Poland): ${message}`;
                 chatBody.appendChild(messageElement);
-                chatInput.value = '';  
-                chatBody.scrollTop = chatBody.scrollHeight; 
+                chatInput.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight;
             } else if (category === "general" && message) {
                 const messageElement = document.createElement("div");
                 messageElement.textContent = message;
