@@ -10,8 +10,8 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: white;
+            background-color: #000;  
+            color: white;            
             line-height: 1.6;
         }
 
@@ -25,6 +25,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            left: 0;
         }
 
         header h1 {
@@ -36,6 +37,7 @@
         header nav {
             display: flex;
             gap: 20px;
+            align-items: center;
         }
 
         header nav a {
@@ -51,7 +53,7 @@
             background-color: #e74c3c;
         }
 
-        header .cta-button {
+        .cta-button {
             background-color: #e74c3c;
             color: white;
             padding: 10px 20px;
@@ -59,16 +61,17 @@
             border-radius: 5px;
             font-size: 1.2em;
             cursor: pointer;
-            display: none; 
+            display: none;
         }
 
-        header .cta-button:hover {
+        .cta-button:hover {
             background-color: #c0392b;
         }
 
         .cta-section {
             padding: 100px 0;
             text-align: center;
+            margin-top: 80px;
         }
 
         .cta-section h2 {
@@ -286,16 +289,17 @@
             const buttons = [promotionsBtn, loginBtn, signupBtn, chatBtn];
             buttons.forEach(button => {
                 button.disabled = false;
-                button.style.backgroundColor = "#e74c3c";
             });
         }
 
         function loginUser() {
-          
+            alert("Login functionality here");
+            closeLogin();
         }
 
         function signUpUser() {
-           
+            alert("Sign Up functionality here");
+            closeSignUp();
         }
 
         function closePromotions() {
