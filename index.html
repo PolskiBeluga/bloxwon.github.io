@@ -79,7 +79,7 @@
             width: 100%;
         }
 
-        
+        /* Chat */
         #chat-container {
             position: fixed;
             bottom: 50px;
@@ -117,10 +117,11 @@
         }
         #chat-input {
             width: 80%;
-            padding: 10px;
+            padding: 15px; 
             border-radius: 8px;
             border: none;
             outline: none;
+            font-size: 1em; 
         }
         #send-button {
             background-color: #e74c3c;
@@ -145,7 +146,7 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        
+
         #chat-category {
             padding: 5px;
             background-color: #2c3e50;
@@ -153,6 +154,43 @@
             border-radius: 8px;
             border: none;
             margin-right: 10px;
+        }
+
+        
+        #login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        #login-modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        #login-modal input {
+            padding: 10px;
+            width: 80%;
+            margin: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        #login-modal button {
+            background-color: #1abc9c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #login-modal button:hover {
+            background-color: #16a085;
         }
     </style>
 </head>
@@ -192,28 +230,57 @@
         <p>&copy; 2024 Bloxwon Casino. All rights reserved.</p>
     </footer>
 
- 
+
     <div id="chat-toggle">💬</div>
 
     <div id="chat-container">
         <div id="chat-header">
-            <span>Live Chat</span>
-            <button onclick="toggleChat()">X</button>
-        </div>
-        <div id="chat-body">
-          
-        </div>
-        <div id="chat-footer">
             <select id="chat-category">
                 <option value="general">General Chat</option>
                 <option value="poland">Poland Only (For Polish users)</option>
             </select>
+            <span>Live Chat</span>
+            <button onclick="toggleChat()">X</button>
+        </div>
+        <div id="chat-body">
+           
+        </div>
+        <div id="chat-footer">
             <input type="text" id="chat-input" placeholder="Type a message...">
             <button id="send-button" onclick="sendMessage()">Send</button>
         </div>
     </div>
 
+    
+    <div id="login-modal">
+        <div id="login-modal-content">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Enter your username">
+            <button onclick="login()">Log in</button>
+        </div>
+    </div>
+
     <script>
+        
+        function showLoginModal() {
+            document.getElementById("login-modal").style.display = "flex";
+        }
+
+        function hideLoginModal() {
+            document.getElementById("login-modal").style.display = "none";
+        }
+
+        function login() {
+            const username = document.getElementById("username").value.trim();
+            if (username) {
+                localStorage.setItem("username", username);
+                hideLoginModal();
+                toggleChat();
+            } else {
+                alert("Please enter a username.");
+            }
+        }
+
         
         function toggleChat() {
             const chatContainer = document.getElementById("chat-container");
@@ -224,30 +291,36 @@
             }
         }
 
-        
+       
         function sendMessage() {
             const chatBody = document.getElementById("chat-body");
             const chatInput = document.getElementById("chat-input");
             const message = chatInput.value.trim();
             const category = document.getElementById("chat-category").value;
 
+            const username = localStorage.getItem("username");
+
+            if (!username) {
+                showLoginModal();
+                return;
+            }
 
             if (category === "poland" && message) {
                 const messageElement = document.createElement("div");
-                messageElement.textContent = `🇵🇱 (Poland): ${message}`;
+                messageElement.textContent = `🇵🇱 ${username}: ${message}`;
                 chatBody.appendChild(messageElement);
-                chatInput.value = '';
-                chatBody.scrollTop = chatBody.scrollHeight;
+                chatInput.value = '';  
+                chatBody.scrollTop = chatBody.scrollHeight; 
             } else if (category === "general" && message) {
                 const messageElement = document.createElement("div");
-                messageElement.textContent = message;
+                messageElement.textContent = `${username}: ${message}`;
                 chatBody.appendChild(messageElement);
                 chatInput.value = '';
                 chatBody.scrollTop = chatBody.scrollHeight;
             }
         }
 
-        // Chat toggle event
+       
         document.getElementById("chat-toggle").addEventListener("click", toggleChat);
     </script>
 
