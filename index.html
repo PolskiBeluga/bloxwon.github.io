@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,14 +14,15 @@
             background-color: #2c3e50;
             color: #fff;
             text-align: center;
+            position: relative; 
         }
         header {
             background-color: #34495e;
-            padding: 15px 30px;  
-            text-align: left;  
+            padding: 15px 30px;
+            text-align: left;
         }
         header h1 {
-            font-size: 2em;  
+            font-size: 2em;
             margin: 0;
             color: #fff;
         }
@@ -77,6 +78,82 @@
             bottom: 0;
             width: 100%;
         }
+
+        /* Chat */
+        #chat-container {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #34495e;
+            border-radius: 10px;
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            padding: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        #chat-header {
+            background-color: #1abc9c;
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #chat-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin: 10px 0;
+            padding: 5px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+        }
+        #chat-footer {
+            display: flex;
+            gap: 10px;
+        }
+        #chat-input {
+            width: 80%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+        #send-button {
+            background-color: #e74c3c;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+        }
+        #send-button:hover {
+            background-color: #c0392b;
+        }
+        #chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Dropdown for categories */
+        #chat-category {
+            padding: 5px;
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 8px;
+            border: none;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -86,34 +163,93 @@
     </header>
 
     <section class="intro">
-        <p>Welcome in bloxwon Casino Play and get Rich!</p>
-        <button class="cta-button">Create account!</button>
+        <p>Welcome to the best online casino, Bloxwon Casino! We offer the latest games and exciting promotions. Play now and win big!</p>
+        <button class="cta-button">Sign up now!</button>
     </section>
 
     <section class="games-section">
         <div class="game-card">
-            <img src="https://via.placeholder.com/200x120" alt="Gra 1">
-            <h3>Automaty</h3>
-            <p>Zagraj w najlepsze automaty slotowe!</p>
-            <button class="cta-button">Graj teraz</button>
+            <img src="https://via.placeholder.com/200x120" alt="Game 1">
+            <h3>Slots</h3>
+            <p>Play the best slot machines!</p>
+            <button class="cta-button">Play Now</button>
         </div>
         <div class="game-card">
-            <img src="https://via.placeholder.com/200x120" alt="Gra 2">
-            <h3>Ruletka</h3>
-            <p>Poczuj emocje gry w ruletkę!</p>
-            <button class="cta-button">Graj teraz</button>
+            <img src="https://via.placeholder.com/200x120" alt="Game 2">
+            <h3>Roulette</h3>
+            <p>Feel the thrill of roulette!</p>
+            <button class="cta-button">Play Now</button>
         </div>
         <div class="game-card">
-            <img src="https://via.placeholder.com/200x120" alt="Gra 3">
+            <img src="https://via.placeholder.com/200x120" alt="Game 3">
             <h3>Poker</h3>
-            <p>Wygraj w klasycznym pokera!</p>
-            <button class="cta-button">Graj teraz</button>
+            <p>Win at classic poker!</p>
+            <button class="cta-button">Play Now</button>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Bloxwon. Wszystkie prawa zastrzeżone.</p>
+        <p>&copy; 2024 Bloxwon Casino. All rights reserved.</p>
     </footer>
+
+
+    <div id="chat-toggle">💬</div>
+
+    <div id="chat-container">
+        <div id="chat-header">
+            <span>Live Chat</span>
+            <button onclick="toggleChat()">X</button>
+        </div>
+        <div id="chat-body">
+           
+        </div>
+        <div id="chat-footer">
+            <select id="chat-category">
+                <option value="general">General Chat</option>
+                <option value="poland">Poland Only (For Polish users)</option>
+            </select>
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        
+        function toggleChat() {
+            const chatContainer = document.getElementById("chat-container");
+            if (chatContainer.style.display === "none" || chatContainer.style.display === "") {
+                chatContainer.style.display = "flex";
+            } else {
+                chatContainer.style.display = "none";
+            }
+        }
+
+       
+        function sendMessage() {
+            const chatBody = document.getElementById("chat-body");
+            const chatInput = document.getElementById("chat-input");
+            const message = chatInput.value.trim();
+            const category = document.getElementById("chat-category").value;
+
+        
+            if (category === "poland" && message) {
+                const messageElement = document.createElement("div");
+                messageElement.textContent = `🇵🇱 (Poland): ${message}`;
+                chatBody.appendChild(messageElement);
+                chatInput.value = '';  
+                chatBody.scrollTop = chatBody.scrollHeight; 
+            } else if (category === "general" && message) {
+                const messageElement = document.createElement("div");
+                messageElement.textContent = message;
+                chatBody.appendChild(messageElement);
+                chatInput.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+
+        // Chat toggle event
+        document.getElementById("chat-toggle").addEventListener("click", toggleChat);
+    </script>
 
 </body>
 </html>
