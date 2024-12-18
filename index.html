@@ -17,7 +17,7 @@
 
         header {
             background-color: #222;
-            padding: 20px;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -36,19 +36,24 @@
         header nav {
             display: flex;
             gap: 30px;
+            justify-content: flex-end;
+            flex-grow: 1;
         }
 
         header nav a {
             color: white;
             text-decoration: none;
             font-size: 1.1em;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
         header nav a:hover {
-            color: #e74c3c;
+            background-color: #e74c3c;
         }
 
-        .cta-button {
+        header .cta-button {
             background-color: #e74c3c;
             color: white;
             padding: 10px 20px;
@@ -58,7 +63,7 @@
             cursor: pointer;
         }
 
-        .cta-button:hover {
+        header .cta-button:hover {
             background-color: #c0392b;
         }
 
@@ -164,6 +169,7 @@
             <a href="#" id="signupBtn">Sign Up</a>
             <a href="#" id="chatBtn">Chat</a>
         </nav>
+        <button class="cta-button" id="signupBtn">Sign Up Now</button>
     </header>
 
     <section class="cta-section">
