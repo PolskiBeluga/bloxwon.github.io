@@ -33,6 +33,11 @@
             padding: 20px;
         }
 
+        .user-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
         .button-container {
             display: flex;
             justify-content: center;
@@ -98,6 +103,23 @@
         .footer p {
             margin: 0;
         }
+
+        .deposit-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            margin-top: 10px;
+            width: 150px;
+            font-size: 16px;
+        }
+
+        .error-message {
+            color: red;
+            display: none;
+        }
     </style>
 </head>
 
@@ -114,7 +136,14 @@
             <p>Your Balance: $<span id="balance"></span></p>
         </div>
 
-        <!-- Button Container (Login / Signup) -->
+        <!-- Deposit Section -->
+        <div class="deposit-container">
+            <input type="number" id="depositAmount" placeholder="Deposit Amount" min="1" />
+            <button onclick="depositAmount()">Deposit</button>
+            <p class="error-message" id="depositError">Please enter a valid positive amount.</p>
+        </div>
+
+        <!-- Button Container (Logout) -->
         <div class="button-container">
             <button onclick="window.location.href='login.html'">Logout</button>
         </div>
@@ -153,14 +182,27 @@
     <script>
         // Retrieve user info from localStorage
         const username = localStorage.getItem('username');
-        const balance = localStorage.getItem('balance');
+        let balance = parseFloat(localStorage.getItem('balance'));
 
-        if (username && balance) {
+        if (username && !isNaN(balance)) {
             document.getElementById('username').textContent = username;
-            document.getElementById('balance').textContent = balance;
+            document.getElementById('balance').textContent = balance.toFixed(2);
         } else {
             // Redirect to login page if no user info found
             window.location.href = 'login.html';
+        }
+
+        // Function to handle deposits
+        function depositAmount() {
+            const depositValue = parseFloat(document.getElementById('depositAmount').value);
+            if (isNaN(depositValue) || depositValue <= 0) {
+                document.getElementById('depositError').style.display = 'block';
+            } else {
+                balance += depositValue;
+                localStorage.setItem('balance', balance.toFixed(2));
+                document.getElementById('balance').textContent = balance.toFixed(2);
+                document.getElementById('depositError').style.display = 'none';
+            }
         }
     </script>
 
