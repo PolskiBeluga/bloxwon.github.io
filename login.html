@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BloxWon Casino - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #222;
+            padding: 15px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            font-size: 24px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #222;
+            color: white;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #f4a261;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e07b4f;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #222;
+            color: #bbb;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .link {
+            color: #f4a261;
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>BloxWon Casino</h1>
+    </header>
+
+    <div class="login-container">
+        <h2>Login to BloxWon Casino</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Error message will appear if login fails -->
+        <p class="error-message" id="errorMessage">Invalid username or password. Please try again.</p>
+
+        <p>Don't have an account? <a href="signup.html" class="link">Sign up</a></p>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 BloxWon Casino. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Define valid credentials (for demo purposes)
+        const validUsername = "user123";
+        const validPassword = "password123";
+        const initialBalance = 1000; // Set a default balance for the user
+
+        // Handle login submission
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Check if the entered username and password are valid
+            if (username === validUsername && password === validPassword) {
+                // Store user info and balance in localStorage
+                localStorage.setItem('username', username);
+                localStorage.setItem('balance', initialBalance);
+
+                // Redirect to the main site (index.html) after successful login
+                window.location.href = 'index.html';
+            } else {
+                // Show error message for invalid login
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        }
+
+        // Add event listener to handle form submission
+        document.getElementById('loginForm').addEventListener('submit', handleLogin);
+    </script>
+
+</body>
+
+</html>
