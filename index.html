@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bloxwon Casino</title>
+    <title>BloxWon Casino</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -34,7 +34,8 @@
         }
 
         .login-container,
-        .deposit-container {
+        .deposit-container,
+        .main-site-container {
             max-width: 500px;
             margin: 30px auto;
             padding: 20px;
@@ -44,7 +45,8 @@
         }
 
         .login-container h2,
-        .deposit-container h2 {
+        .deposit-container h2,
+        .main-site-container h2 {
             text-align: center;
             font-size: 24px;
         }
@@ -97,17 +99,22 @@
         .link:hover {
             text-decoration: underline;
         }
+
+        /* Hidden by default */
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
 
     <header>
-        <h1>Bloxwon Casino</h1>
+        <h1>BloxWon Casino</h1>
     </header>
 
     <!-- Login Section -->
-    <div class="login-container">
+    <div class="login-container" id="loginSection">
         <h2>Login</h2>
         <form id="loginForm">
             <input type="text" id="username" placeholder="Username" required>
@@ -117,13 +124,19 @@
         <p>Don't have an account? <a href="signup.html" class="link">Sign up</a></p>
     </div>
 
-    <!-- Deposit Section -->
-    <div class="deposit-container">
-        <h2>Deposit</h2>
-        <form id="depositForm">
-            <input type="number" id="depositAmount" placeholder="Enter amount" required>
-            <button type="submit">Deposit</button>
-        </form>
+    <!-- Main Site Section - Hidden until login -->
+    <div class="main-site-container hidden" id="mainSiteSection">
+        <h2>Welcome to BloxWon Casino!</h2>
+        <p>Welcome back, <span id="userNameDisplay"></span>! Enjoy your time at the casino!</p>
+        <button onclick="showDeposit()">Deposit</button>
+        
+        <div id="depositSection" class="hidden">
+            <h2>Deposit</h2>
+            <form id="depositForm">
+                <input type="number" id="depositAmount" placeholder="Enter amount" required>
+                <button type="submit">Deposit</button>
+            </form>
+        </div>
     </div>
 
     <div class="footer">
@@ -132,23 +145,34 @@
 
     <!-- Optional JavaScript -->
     <script>
-        // Example of JavaScript handling for login and deposit actions
-        document.getElementById('loginForm').addEventListener('submit', function (event) {
+        // Handle login state
+        let isLoggedIn = false;
+
+        // Show login page initially
+        function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Placeholder for actual login logic, e.g., Firebase authentication or a custom API
-            alert('Logged in with username: ' + username);
-        });
+            // Placeholder for actual login logic, e.g., check username/password or use Firebase
+            if (username && password) {
+                // User successfully logged in
+                isLoggedIn = true;
+                document.getElementById('loginSection').classList.add('hidden');  // Hide login section
+                document.getElementById('mainSiteSection').classList.remove('hidden');  // Show main site section
+                document.getElementById('userNameDisplay').textContent = username;  // Display username
+            } else {
+                alert('Please enter both username and password.');
+            }
+        }
 
-        document.getElementById('depositForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            const amount = document.getElementById('depositAmount').value;
+        // Show deposit form after login
+        function showDeposit() {
+            document.getElementById('depositSection').classList.remove('hidden');
+        }
 
-            // Placeholder for actual deposit logic, e.g., using a payment API
-            alert('Deposited amount: $' + amount);
-        });
+        // Add event listener for login form
+        document.getElementById('loginForm').addEventListener('submit', handleLogin);
     </script>
 
 </body>
