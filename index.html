@@ -14,6 +14,43 @@
             color: #fff;
             margin: 0;
             padding: 0;
+            display: flex;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: #222;
+            width: 200px;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #f4a261;
+            padding: 15px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a:hover {
+            background-color: #333;
+            border-radius: 5px;
+        }
+
+        .container {
+            margin-left: 220px;
+            padding: 20px;
+            flex: 1;
         }
 
         header {
@@ -25,12 +62,6 @@
         header h1 {
             margin: 0;
             font-size: 36px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
         }
 
         .user-info {
@@ -125,12 +156,23 @@
 
 <body>
 
-    <header>
-        <h1>BloxWon Casino</h1>
-    </header>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>BloxWon Casino</h3>
+        <a href="#">Roulette</a>
+        <a href="#">Blackjack</a>
+        <a href="#">Slots</a>
+        <a href="#">Poker</a>
+        <!-- Redirecting to profile page -->
+        <a href="profile.html">Profile</a>
+    </div>
 
+    <!-- Main Content -->
     <div class="container">
-        <!-- User Info -->
+        <header>
+            <h1>BloxWon Casino</h1>
+        </header>
+
         <div class="user-info">
             <h2>Welcome, <span id="username"></span>!</h2>
             <p>Your Balance: $<span id="balance"></span></p>
@@ -143,9 +185,11 @@
             <p class="error-message" id="depositError">Please enter a valid positive amount.</p>
         </div>
 
-        <!-- Button Container (Logout) -->
+        <!-- Button Container (Logout and Profile) -->
         <div class="button-container">
             <button onclick="window.location.href='login.html'">Logout</button>
+            <!-- Profile Button -->
+            <button onclick="window.location.href='profile.html'">Profile</button>
         </div>
 
         <!-- Main Content Area -->
@@ -173,6 +217,7 @@
                 <button>Play Now</button>
             </div>
         </div>
+
     </div>
 
     <div class="footer">
