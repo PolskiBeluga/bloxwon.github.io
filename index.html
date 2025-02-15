@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BloxWon Casino</title>
+    <title>BloxWon Casino - Main</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -14,12 +14,6 @@
             color: #fff;
             margin: 0;
             padding: 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
         }
 
         header {
@@ -33,50 +27,64 @@
             font-size: 36px;
         }
 
-        .login-container,
-        .deposit-container,
-        .main-site-container {
-            max-width: 500px;
-            margin: 30px auto;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
-            background-color: #333;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .login-container h2,
-        .deposit-container h2,
-        .main-site-container h2 {
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            background-color: #f4a261;
+            padding: 12px 25px;
+            border-radius: 5px;
+            border: none;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            margin: 0 15px;
+        }
+
+        .button-container button:hover {
+            background-color: #e07b4f;
+        }
+
+        .main-content {
+            margin-top: 40px;
             text-align: center;
+        }
+
+        .game-card {
+            display: inline-block;
+            background-color: #333;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 200px;
+        }
+
+        .game-card h3 {
             font-size: 24px;
         }
 
-        input[type="text"],
-        input[type="password"],
-        input[type="number"],
-        button {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #444;
-            background-color: #444;
-            color: white;
-            font-size: 16px;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="number"] {
-            background-color: #222;
-        }
-
-        button {
+        .game-card button {
             background-color: #f4a261;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
             cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
         }
 
-        button:hover {
+        .game-card button:hover {
             background-color: #e07b4f;
         }
 
@@ -90,20 +98,6 @@
         .footer p {
             margin: 0;
         }
-
-        .link {
-            color: #f4a261;
-            text-decoration: none;
-        }
-
-        .link:hover {
-            text-decoration: underline;
-        }
-
-        /* Hidden by default */
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 
@@ -113,29 +107,42 @@
         <h1>BloxWon Casino</h1>
     </header>
 
-    <!-- Login Section -->
-    <div class="login-container" id="loginSection">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <p>Don't have an account? <a href="signup.html" class="link">Sign up</a></p>
-    </div>
+    <div class="container">
+        <!-- User Info -->
+        <div class="user-info">
+            <h2>Welcome, <span id="username"></span>!</h2>
+            <p>Your Balance: $<span id="balance"></span></p>
+        </div>
 
-    <!-- Main Site Section - Hidden until login -->
-    <div class="main-site-container hidden" id="mainSiteSection">
-        <h2>Welcome to BloxWon Casino!</h2>
-        <p>Welcome back, <span id="userNameDisplay"></span>! Enjoy your time at the casino!</p>
-        <button onclick="showDeposit()">Deposit</button>
-        
-        <div id="depositSection" class="hidden">
-            <h2>Deposit</h2>
-            <form id="depositForm">
-                <input type="number" id="depositAmount" placeholder="Enter amount" required>
-                <button type="submit">Deposit</button>
-            </form>
+        <!-- Button Container (Login / Signup) -->
+        <div class="button-container">
+            <button onclick="window.location.href='login.html'">Logout</button>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <h2>Try your luck with these games:</h2>
+
+            <!-- Game Cards -->
+            <div class="game-card">
+                <h3>Roulette</h3>
+                <button>Play Now</button>
+            </div>
+
+            <div class="game-card">
+                <h3>Blackjack</h3>
+                <button>Play Now</button>
+            </div>
+
+            <div class="game-card">
+                <h3>Slots</h3>
+                <button>Play Now</button>
+            </div>
+
+            <div class="game-card">
+                <h3>Poker</h3>
+                <button>Play Now</button>
+            </div>
         </div>
     </div>
 
@@ -143,36 +150,18 @@
         <p>© 2025 BloxWon Casino. All rights reserved.</p>
     </div>
 
-    <!-- Optional JavaScript -->
     <script>
-        // Handle login state
-        let isLoggedIn = false;
+        // Retrieve user info from localStorage
+        const username = localStorage.getItem('username');
+        const balance = localStorage.getItem('balance');
 
-        // Show login page initially
-        function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            // Placeholder for actual login logic, e.g., check username/password or use Firebase
-            if (username && password) {
-                // User successfully logged in
-                isLoggedIn = true;
-                document.getElementById('loginSection').classList.add('hidden');  // Hide login section
-                document.getElementById('mainSiteSection').classList.remove('hidden');  // Show main site section
-                document.getElementById('userNameDisplay').textContent = username;  // Display username
-            } else {
-                alert('Please enter both username and password.');
-            }
+        if (username && balance) {
+            document.getElementById('username').textContent = username;
+            document.getElementById('balance').textContent = balance;
+        } else {
+            // Redirect to login page if no user info found
+            window.location.href = 'login.html';
         }
-
-        // Show deposit form after login
-        function showDeposit() {
-            document.getElementById('depositSection').classList.remove('hidden');
-        }
-
-        // Add event listener for login form
-        document.getElementById('loginForm').addEventListener('submit', handleLogin);
     </script>
 
 </body>
